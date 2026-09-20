@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Venkatesh Orusu | Microsoft Certified D365 F&O Technical Consultant</title>
+  
+  <!-- Inter & Outfit Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            azure: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              200: '#b9dffd',
+              300: '#7cc2fd',
+              400: '#36a3f9',
+              500: '#0078d4', // Official Microsoft Azure Blue
+              600: '#106ebe',
+              700: '#005a9e',
+              800: '#004578',
+              900: '#00335a',
+            },
+            d365: {
+              light: '#f5f3ff',
+              primary: '#6b46c1',
+              dark: '#4c1d95',
+            }
+          },
+          boxShadow: {
+            'glow': '0 0 25px -4px rgba(0, 120, 212, 0.35)',
+            'glow-cyan': '0 0 25px -4px rgba(6, 182, 212, 0.35)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Phosphor Icons CDN -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.05);
+    }
+    .dark ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #0078d4;
+      border-radius: 9999px;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+      background: #106ebe;
+    }
+
+    /* Print Overrides for Recruiter PDF Generation */
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .print-card {
+        border: 1px solid #cbd5e1 !important;
+        break-inside: avoid;
+        box-shadow: none !important;
+        background: #ffffff !important;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-[#070d18] text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300 antialiased selection:bg-azure-500 selection:text-white relative">
+
+  <!-- Background decorative glows -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-azure-500/10 via-azure-600/5 to-transparent blur-3xl pointer-events-none -z-10"></div>
+
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-white/85 dark:bg-[#070d18]/85 border-b border-slate-200 dark:border-slate-800/80 transition-colors no-print">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Logo / Name Identification -->
+      <a href="#hero" class="flex items-center space-x-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-azure-600 to-indigo-600 text-white flex items-center justify-center font-heading font-extrabold text-base shadow-md group-hover:scale-105 transition-transform">
+          VO
+        </div>
+        <div>
+          <div class="font-heading font-bold text-base tracking-tight text-slate-900 dark:text-white flex items-center gap-1.5">
+            Venkatesh Orusu
+            <span class="text-xs px-1.5 py-0.5 rounded bg-azure-100 dark:bg-azure-900/50 text-azure-700 dark:text-azure-300 font-normal">MB-500</span>
+          </div>
+          <div class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">D365 F&amp;O Technical Consultant</div>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation links -->
+      <nav class="hidden md:flex items-center space-x-1 text-sm font-medium text-slate-600 dark:text-slate-300">
+        <a href="#about" class="px-3 py-1.5 rounded-lg hover:text-azure-600 dark:hover:text-azure-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">About</a>
+        <a href="#experience" class="px-3 py-1.5 rounded-lg hover:text-azure-600 dark:hover:text-azure-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Experience</a>
+        <a href="#skills" class="px-3 py-1.5 rounded-lg hover:text-azure-600 dark:hover:text-azure-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Skills</a>
+        <a href="#projects" class="px-3 py-1.5 rounded-lg hover:text-azure-600 dark:hover:text-azure-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Projects</a>
+        <a href="#certifications" class="px-3 py-1.5 rounded-lg hover:text-azure-600 dark:hover:text-azure-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Credentials</a>
+        <a href="#education" class="px-3 py-1.5 rounded-lg hover:text-azure-600 dark:hover:text-azure-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">Education</a>
+      </nav>
+
+      <!-- Action buttons & Dark mode toggle -->
+      <div class="flex items-center space-x-2">
+        <button id="themeToggleBtn" aria-label="Toggle theme" class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none">
+          <i id="themeIcon" class="ph ph-moon text-xl"></i>
+        </button>
+
+        <button onclick="copyShareableLink()" class="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/80 transition-colors shadow-sm">
+          <i class="ph ph-share-network text-base text-azure-600 dark:text-azure-400"></i>
+          <span>Share</span>
+        </button>
+
+        <button onclick="window.print()" class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-azure-600 hover:bg-azure-700 text-white shadow-sm transition-all hover:shadow-glow">
+          <i class="ph ph-printer text-base"></i>
+          <span>Print / PDF</span>
+        </button>
+
+        <!-- Mobile Navigation Menu Toggle -->
+        <button id="mobileMenuBtn" aria-label="Open mobile menu" class="md:hidden p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+          <i class="ph ph-list text-2xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c1322] px-4 py-3 space-y-1">
+      <a href="#about" class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">About</a>
+      <a href="#experience" class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Experience</a>
+      <a href="#skills" class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Skills</a>
+      <a href="#projects" class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Projects</a>
+      <a href="#certifications" class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Certifications</a>
+      <a href="#education" class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Education</a>
+      <a href="#contact" class="block px-3 py-2 rounded-md text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Contact</a>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+    
+    <section id="hero" class="pt-4 sm:pt-10">
+      <div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-10">
+        <div class="flex-1 text-center lg:text-left space-y-5">
+          
+          <!-- Availability & Microsoft Badge banner -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Available for Global Engagements
+            </span>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-azure-500/10 text-azure-600 dark:text-azure-300 border border-azure-500/20">
+              <i class="ph ph-seal-check text-azure-600 dark:text-azure-400"></i>
+              MB-500 Certified Associate
+            </span>
+          </div>
+
+          <!-- Main Name & Title -->
+          <div>
+            <h1 class="text-3xl sm:text-5xl font-extrabold font-heading text-slate-900 dark:text-white tracking-tight leading-tight">
+              Venkatesh Orusu <span class="text-sm sm:text-base font-normal text-slate-500 dark:text-slate-400 align-middle">(He/Him)</span>
+            </h1>
+            <p class="text-lg sm:text-xl font-semibold text-azure-600 dark:text-azure-400 mt-2 font-heading">
+              Dynamics 365 Finance &amp; Operations Technical Consultant
+            </p>
+          </div>
+
+          <!-- Quick Location & Contact Bar -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+            <span class="inline-flex items-center gap-1.5">
+              <i class="ph ph-map-pin text-azure-600 dark:text-azure-400 text-base"></i>
+              Hyderabad, Telangana, India
+            </span>
+            <a href="tel:+918008036296" class="inline-flex items-center gap-1.5 hover:text-azure-600 dark:hover:text-azure-400 transition-colors">
+              <i class="ph ph-phone text-azure-600 dark:text-azure-400 text-base"></i>
+              +91 800 803 6296
+            </a>
+            <a href="mailto:Venkatesh8008036296@gmail.com" class="inline-flex items-center gap-1.5 hover:text-azure-600 dark:hover:text-azure-400 transition-colors">
+              <i class="ph ph-envelope-simple text-azure-600 dark:text-azure-400 text-base"></i>
+              Venkatesh8008036296@gmail.com
+            </a>
+          </div>
+
+          <!-- Summary Snippet -->
+          <p class="text-slate-600 dark:text-slate-300 max-w-2xl text-sm sm:text-base leading-relaxed">
+            Technical Consultant with overall <strong>4+ years of experience in software development</strong> and <strong>3+ years dedicated to Microsoft Dynamics 365 F&amp;O</strong>. Proven track record in implementing, customizing, and supporting enterprise solutions with X++, SSRS, Docentric reporting, and Power Platform integrations.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+            <a href="mailto:Venkatesh8008036296@gmail.com?subject=Opportunity%20Inquiry%20-%20D365%20F%26O%20Technical%20Consultant" class="px-5 py-2.5 rounded-xl bg-azure-600 hover:bg-azure-700 text-white text-sm font-semibold shadow-md hover:shadow-glow transition-all active:scale-95 flex items-center gap-2">
+              <i class="ph ph-paper-plane-tilt text-base"></i>
+              <span>Hire / Contact Me</span>
+            </a>
+            <a href="http://www.linkedin.com/in/venkatesh-orusu/" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-sm font-semibold transition-all flex items-center gap-2">
+              <i class="ph ph-linkedin-logo text-base text-[#0077B5]"></i>
+              <span>LinkedIn Profile</span>
+            </a>
+            <button onclick="copyShareableLink()" class="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-semibold transition-all flex items-center gap-2" title="Copy web link">
+              <i class="ph ph-link-simple text-base"></i>
+              <span>Copy Link</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Microsoft Credentials Card / Badge Showcase -->
+        <div class="relative flex-shrink-0">
+          <div class="absolute -inset-2 bg-gradient-to-r from-azure-600 via-indigo-600 to-cyan-500 rounded-3xl opacity-25 blur-xl group-hover:opacity-40 transition duration-500"></div>
+          <div class="relative w-72 sm:w-80 p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl space-y-4 text-center">
+            
+            <!-- MS Associate Emblem -->
+            <div class="mx-auto w-24 h-24 rounded-2xl bg-gradient-to-tr from-azure-700 to-azure-500 flex flex-col items-center justify-center p-3 text-white shadow-lg relative">
+              <i class="ph ph-microsoft-logo text-3xl mb-1"></i>
+              <div class="text-[9px] font-bold tracking-widest uppercase">CERTIFIED</div>
+              <div class="text-[8px] opacity-90">ASSOCIATE</div>
+              <span class="absolute -bottom-2 px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 font-bold text-[9px] tracking-wider uppercase shadow">MB-500</span>
+            </div>
+
+            <div>
+              <h3 class="font-heading font-bold text-base text-slate-900 dark:text-white">Microsoft Certified</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">D365: Finance and Operations Apps Developer Associate</p>
+            </div>
+
+            <!-- Mini stats pill list -->
+            <div class="border-t border-slate-100 dark:border-slate-800 pt-3 space-y-2 text-left text-xs">
+              <div class="flex items-center justify-between text-slate-600 dark:text-slate-300">
+                <span class="flex items-center gap-1.5"><i class="ph ph-check text-azure-500"></i> Primary Role</span>
+                <span class="font-semibold text-slate-900 dark:text-white">D365 FO Technical</span>
+              </div>
+              <div class="flex items-center justify-between text-slate-600 dark:text-slate-300">
+                <span class="flex items-center gap-1.5"><i class="ph ph-check text-azure-500"></i> Core Stack</span>
+                <span class="font-semibold text-slate-900 dark:text-white">X++, SSRS, Docentric</span>
+              </div>
+              <div class="flex items-center justify-between text-slate-600 dark:text-slate-300">
+                <span class="flex items-center gap-1.5"><i class="ph ph-check text-azure-500"></i> Integrations</span>
+                <span class="font-semibold text-slate-900 dark:text-white">Power Platform &amp; OData</span>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <a href="#certifications" class="text-xs font-semibold text-azure-600 dark:text-azure-400 hover:underline inline-flex items-center gap-1">
+                <span>View all 5+ Credentials</span>
+                <i class="ph ph-arrow-right"></i>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Ribbon -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-azure-600 dark:text-azure-400 font-heading">4+ Years</div>
+          <div class="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mt-1">Software Development</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-azure-600 dark:text-azure-400 font-heading">3+ Years</div>
+          <div class="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mt-1">D365 F&amp;O Specialization</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-azure-600 dark:text-azure-400 font-heading">7+ Clients</div>
+          <div class="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mt-1">Global Implementations</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-azure-600 dark:text-azure-400 font-heading">MB-500</div>
+          <div class="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mt-1">Microsoft Certified</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="pt-6">
+      <div class="flex items-center space-x-2 mb-6">
+        <div class="h-6 w-1.5 bg-azure-600 rounded-full"></div>
+        <h2 class="text-2xl font-bold font-heading text-slate-900 dark:text-white">Professional Summary</h2>
+      </div>
+
+      <div class="p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base print-card">
+        <p>
+          I have overall <strong>4+ years’ experience in software development</strong> and work as a <strong>D365 F&amp;O Technical Consultant with 3+ years of experience</strong> specializing in implementing, customizing, and supporting Dynamics 365 Finance and Operations solutions.
+        </p>
+        <p>
+          Proven expertise in <strong>X++, SSRS, Docentric reporting, and Power Platform integration</strong>. Adept at managing full project lifecycles, from requirement analysis to post-go-live support, for a range of industry clients across manufacturing, supply chain, retail, and finance. Certified in <strong>MB-500</strong>, with strong problem-solving skills and a passion for delivering high-quality technical solutions that align directly with business objectives.
+        </p>
+
+        <!-- Focus areas highlights -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-3">
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
+            <div class="flex items-center gap-2 text-azure-600 dark:text-azure-400 font-semibold text-sm mb-1">
+              <i class="ph ph-gear text-lg"></i>
+              <span>Core Customizations</span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-normal">
+              Extensions, Tables, Forms, Menus, Workflows, Batch jobs, and granular Security Roles.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
+            <div class="flex items-center gap-2 text-azure-600 dark:text-azure-400 font-semibold text-sm mb-1">
+              <i class="ph ph-chart-line-up text-lg"></i>
+              <span>Enterprise Reporting</span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-normal">
+              High-volume SSRS designs, Docentric AX templates, Power BI datasets, and Entity Store analytics.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
+            <div class="flex items-center gap-2 text-azure-600 dark:text-azure-400 font-semibold text-sm mb-1">
+              <i class="ph ph-cloud-arrow-up text-lg"></i>
+              <span>Integrations &amp; DevOps</span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-normal">
+              DMF data migration, OData, REST APIs, Power Automate, LCS environment lifecycle &amp; Azure DevOps CI/CD.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="pt-6">
+      <div class="flex items-center space-x-2 mb-6">
+        <div class="h-6 w-1.5 bg-azure-600 rounded-full"></div>
+        <h2 class="text-2xl font-bold font-heading text-slate-900 dark:text-white">Work Experience</h2>
+      </div>
+
+      <div class="relative border-l-2 border-slate-200 dark:border-slate-800 ml-3 sm:ml-4 space-y-10">
+        
+        <!-- Position 1: Alithya -->
+        <div class="relative pl-7 sm:pl-9">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-azure-600 border-4 border-white dark:border-[#070d18] shadow"></div>
+          
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-azure-500/40 transition-all print-card">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white font-heading">
+                  Technical Consultant
+                </h3>
+                <div class="text-sm font-semibold text-azure-600 dark:text-azure-400">
+                  Alithya Software Private Limited &bull; Hyderabad, India
+                </div>
+              </div>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full bg-azure-100 dark:bg-azure-900/50 text-azure-700 dark:text-azure-300">
+                October 2025 – Present
+              </span>
+            </div>
+
+            <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-outside ml-4">
+              <li>Deliver D365 F&amp;O customizations, reports, integrations, defect fixes, QA support, and Azure DevOps deployments across active client projects.</li>
+              <li>Analyze Functional Design Documents (FDDs), translate complex requirements into scalable technical designs, and implement robust X++ extension-based solutions.</li>
+              <li>Coordinate closely with functional consultants, QA testers, and system administrators to validate fixes, resolve environment issues, and execute smooth releases.</li>
+            </ul>
+
+            <div class="flex flex-wrap gap-1.5 mt-5">
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Dynamics 365 F&amp;O</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">X++ Extensions</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Azure DevOps CI/CD</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">FDD Analysis</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Defect Resolution</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Position 2: Argano -->
+        <div class="relative pl-7 sm:pl-9">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-600 border-4 border-white dark:border-[#070d18]"></div>
+          
+          <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-azure-500/40 transition-all print-card">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white font-heading">
+                  Associate Technical Consultant
+                </h3>
+                <div class="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                  Argano Software Private Limited &bull; Hyderabad, India
+                </div>
+              </div>
+              <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                June 2022 – October 2025
+              </span>
+            </div>
+
+            <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-outside ml-4">
+              <li>Built tailored D365 F&amp;O solutions utilizing X++, extensions, SSRS, Docentric, data entities, and Power Platform integrations.</li>
+              <li>Converted detailed functional requirements into scalable technical designs, validations, workflows, and reusable extension patterns.</li>
+              <li>Enhanced SSRS, Docentric, and Power BI reports for finance, inventory, and operational insights across diverse business groups.</li>
+              <li>Supported delivery from initial requirement analysis and development through testing, deployment, validation, and post-go-live hypercare.</li>
+              <li>Handled customization, reporting, integration, migration, and support across finance, supply chain, inventory, and manufacturing modules.</li>
+              <li>Managed Azure DevOps work items, code reviews, continuous builds, deployments, and release coordination.</li>
+              <li>Resolved issues in customizations, integrations, batch jobs, and environments through deep debugging, tracing, and performance optimization.</li>
+              <li>Partnered with functional, QA, admin, and client teams to validate fixes and guarantee smooth release delivery.</li>
+            </ul>
+
+            <div class="flex flex-wrap gap-1.5 mt-5">
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Docentric AX</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">SSRS Reporting</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Data Entities &amp; DMF</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">Power Platform</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">LCS &amp; Batch Jobs</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="skills" class="pt-6">
+      <div class="flex items-center space-x-2 mb-6">
+        <div class="h-6 w-1.5 bg-azure-600 rounded-full"></div>
+        <h2 class="text-2xl font-bold font-heading text-slate-900 dark:text-white">Technical Skills &amp; Competencies</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <!-- D365 FO Modules -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm print-card">
+          <div class="flex items-center space-x-2.5 text-azure-600 dark:text-azure-400 font-bold mb-3 font-heading">
+            <i class="ph ph-squares-four text-xl"></i>
+            <h3>D365 FO Modules</h3>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-azure-50 dark:bg-azure-900/40 text-azure-800 dark:text-azure-200 font-medium">Finance</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-azure-50 dark:bg-azure-900/40 text-azure-800 dark:text-azure-200 font-medium">Supply Chain Management</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-azure-50 dark:bg-azure-900/40 text-azure-800 dark:text-azure-200 font-medium">Manufacturing</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-azure-50 dark:bg-azure-900/40 text-azure-800 dark:text-azure-200 font-medium">Retail</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-azure-50 dark:bg-azure-900/40 text-azure-800 dark:text-azure-200 font-medium">Human Resources</span>
+          </div>
+        </div>
+
+        <!-- Development Tools -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm print-card">
+          <div class="flex items-center space-x-2.5 text-azure-600 dark:text-azure-400 font-bold mb-3 font-heading">
+            <i class="ph ph-terminal-window text-xl"></i>
+            <h3>Development Tools</h3>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">X++</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Visual Studio</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Azure DevOps</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">LCS (Lifecycle Services)</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Git / Pipelines</span>
+          </div>
+        </div>
+
+        <!-- Customization -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm print-card">
+          <div class="flex items-center space-x-2.5 text-azure-600 dark:text-azure-400 font-bold mb-3 font-heading">
+            <i class="ph ph-code-block text-xl"></i>
+            <h3>Customization &amp; Architecture</h3>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Extensions (CoC &amp; Event Handlers)</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Tables &amp; Views</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Menus &amp; Forms</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Workflows</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Batch Jobs</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Security Roles</span>
+          </div>
+        </div>
+
+        <!-- Reporting & Analytics -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm print-card">
+          <div class="flex items-center space-x-2.5 text-azure-600 dark:text-azure-400 font-bold mb-3 font-heading">
+            <i class="ph ph-chart-polar text-xl"></i>
+            <h3>Reporting &amp; Analytics</h3>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">SSRS Custom Reports</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Docentric AX</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Power BI</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Entity Store</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Print Management</span>
+          </div>
+        </div>
+
+        <!-- Data Migration & Database -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm print-card">
+          <div class="flex items-center space-x-2.5 text-azure-600 dark:text-azure-400 font-bold mb-3 font-heading">
+            <i class="ph ph-database text-xl"></i>
+            <h3>Data Migration</h3>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Data Management Framework (DMF)</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">SQL Server</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Data Entities &amp; Staging</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Data Restoration &amp; Backups</span>
+          </div>
+        </div>
+
+        <!-- Integration, Cloud & Power Platform -->
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm print-card">
+          <div class="flex items-center space-x-2.5 text-azure-600 dark:text-azure-400 font-bold mb-3 font-heading">
+            <i class="ph ph-plug-charging text-xl"></i>
+            <h3>Integrations &amp; Cloud</h3>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">OData &amp; REST APIs</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">SOAP</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Power Automate</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Logic Apps</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Power Apps (Canvas &amp; Model-driven)</span>
+            <span class="px-2.5 py-1 text-xs rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium">Microsoft Azure VMs</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="projects" class="pt-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div class="flex items-center space-x-2">
+          <div class="h-6 w-1.5 bg-azure-600 rounded-full"></div>
+          <div>
+            <h2 class="text-2xl font-bold font-heading text-slate-900 dark:text-white">Featured Client Projects</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Implementation, Migration &amp; Technical Consultation Engagements</p>
+          </div>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap items-center gap-1.5 bg-slate-200/70 dark:bg-slate-800/90 p-1 rounded-xl text-xs font-medium self-start sm:self-auto no-print">
+          <button onclick="filterProjects('all', this)" class="project-filter-btn px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white transition-all font-semibold">All (7)</button>
+          <button onclick="filterProjects('implementation', this)" class="project-filter-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">Implementation</button>
+          <button onclick="filterProjects('system-management', this)" class="project-filter-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">LCS &amp; DevOps</button>
+          <button onclick="filterProjects('support-reporting', this)" class="project-filter-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">Support &amp; Reports</button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Project 1: Hayward Pools -->
+        <div class="project-card group rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-azure-500/40 transition-all print-card" data-category="implementation">
+          <div>
+            <div class="p-5 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">Implementation</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400">Nov 2025 – Present</span>
+              </div>
+              <h3 class="text-base font-bold font-heading text-slate-900 dark:text-white group-hover:text-azure-600 dark:group-hover:text-azure-400 transition-colors">
+                Hayward Pools
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Global Leader in Pool Equipment &amp; Automation Systems</p>
+            </div>
+            
+            <div class="p-5 space-y-3">
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                Built D365 F&amp;O customizations using X++, extensions, forms, tables, and batch processing. Enhanced sales, inventory, and finance processes with validations and logic changes.
+              </p>
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">X++</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Forms &amp; Tables</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Batch Processing</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Azure DevOps</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 pt-0">
+            <button onclick="openModal('hayward')" class="w-full py-2 px-3 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-azure-600 hover:text-white dark:hover:bg-azure-600 transition-colors flex items-center justify-center gap-1.5 no-print">
+              <span>View Full Case Details</span>
+              <i class="ph ph-arrow-up-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 2: Palmer Donovan -->
+        <div class="project-card group rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-azure-500/40 transition-all print-card" data-category="implementation">
+          <div>
+            <div class="p-5 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">Implementation</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400">April 2026 – Present</span>
+              </div>
+              <h3 class="text-base font-bold font-heading text-slate-900 dark:text-white group-hover:text-azure-600 dark:group-hover:text-azure-400 transition-colors">
+                Palmer Donovan
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Building Materials Distributor &amp; Door Fabrication</p>
+            </div>
+            
+            <div class="p-5 space-y-3">
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                Built D365 F&amp;O enhancements for distribution and supply chain processes. Supported integrations using data entities, OData endpoints, and Power Platform touchpoints.
+              </p>
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Distribution</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Data Entities</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">OData</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Power Platform</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 pt-0">
+            <button onclick="openModal('palmer')" class="w-full py-2 px-3 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-azure-600 hover:text-white dark:hover:bg-azure-600 transition-colors flex items-center justify-center gap-1.5 no-print">
+              <span>View Full Case Details</span>
+              <i class="ph ph-arrow-up-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 3: NVR -->
+        <div class="project-card group rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-azure-500/40 transition-all print-card" data-category="implementation">
+          <div>
+            <div class="p-5 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">Implementation</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400">Dec 2025 – Present</span>
+              </div>
+              <h3 class="text-base font-bold font-heading text-slate-900 dark:text-white group-hover:text-azure-600 dark:group-hover:text-azure-400 transition-colors">
+                NVR
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Leading U.S. Homebuilding &amp; Mortgage Banking</p>
+            </div>
+            
+            <div class="p-5 space-y-3">
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                Developed D365 F&amp;O customizations for homebuilding and finance operations. Enhanced reports, validations, and automations across modules with QA &amp; functional coordination.
+              </p>
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Homebuilding</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Finance Workflows</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Reporting</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">DevOps</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 pt-0">
+            <button onclick="openModal('nvr')" class="w-full py-2 px-3 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-azure-600 hover:text-white dark:hover:bg-azure-600 transition-colors flex items-center justify-center gap-1.5 no-print">
+              <span>View Full Case Details</span>
+              <i class="ph ph-arrow-up-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 4: CS (Construction Specialties) -->
+        <div class="project-card group rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-azure-500/40 transition-all print-card" data-category="implementation">
+          <div>
+            <div class="p-5 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">Offshore Implementation</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400">April 2025 – Oct 2025</span>
+              </div>
+              <h3 class="text-base font-bold font-heading text-slate-900 dark:text-white group-hover:text-azure-600 dark:group-hover:text-azure-400 transition-colors">
+                Construction Specialties (CS)
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Architectural Product Solutions Leader</p>
+            </div>
+            
+            <div class="p-5 space-y-3">
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                Customized D365 FO using X++ and extensions to meet client-specific manufacturing processes (such as custom Legacy Item numbering) and executed data migrations via Data Entities.
+              </p>
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Legacy Item Logic</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Data Entities</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">X++ Extensions</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 pt-0">
+            <button onclick="openModal('cs')" class="w-full py-2 px-3 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-azure-600 hover:text-white dark:hover:bg-azure-600 transition-colors flex items-center justify-center gap-1.5 no-print">
+              <span>View Full Case Details</span>
+              <i class="ph ph-arrow-up-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 5: Argano IP -->
+        <div class="project-card group rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-azure-500/40 transition-all print-card" data-category="system-management">
+          <div>
+            <div class="p-5 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300">System Management</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400">Nov 2024 – April 2025</span>
+              </div>
+              <h3 class="text-base font-bold font-heading text-slate-900 dark:text-white group-hover:text-azure-600 dark:group-hover:text-azure-400 transition-colors">
+                Argano IP (9 D365FO ISVs)
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Enterprise Product Suites &amp; Infrastructure Automation</p>
+            </div>
+            
+            <div class="p-5 space-y-3">
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                Managed LCS environment provisioning and deallocation, system upgradations, automated build &amp; release CI/CD pipelines in Azure DevOps, and automated Azure VM tasks.
+              </p>
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">LCS Management</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Azure DevOps CI/CD</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Azure VM Automation</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Data Restoration</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 pt-0">
+            <button onclick="openModal('argano-ip')" class="w-full py-2 px-3 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-azure-600 hover:text-white dark:hover:bg-azure-600 transition-colors flex items-center justify-center gap-1.5 no-print">
+              <span>View Full Case Details</span>
+              <i class="ph ph-arrow-up-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 6: AquaCal - Team Horner Group -->
+        <div class="project-card group rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-azure-500/40 transition-all print-card" data-category="implementation">
+          <div>
+            <div class="p-5 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">Implementation</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400">August 2023 – Oct 2025</span>
+              </div>
+              <h3 class="text-base font-bold font-heading text-slate-900 dark:text-white group-hover:text-azure-600 dark:group-hover:text-azure-400 transition-colors">
+                AquaCal (Team Horner Group)
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Pool Temperature Units &amp; Manufacturing</p>
+            </div>
+            
+            <div class="p-5 space-y-3">
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                Led end-to-end technical implementation of D365 FO, custom payment processing modules, legacy data migration using DMF, and created Docentric, SSRS &amp; Power BI reports.
+              </p>
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Payment Processing</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">DMF Migration</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Docentric</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Power BI</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 pt-0">
+            <button onclick="openModal('aquacal')" class="w-full py-2 px-3 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-azure-600 hover:text-white dark:hover:bg-azure-600 transition-colors flex items-center justify-center gap-1.5 no-print">
+              <span>View Full Case Details</span>
+              <i class="ph ph-arrow-up-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 7: PHI Inventory Management -->
+        <div class="project-card group rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between hover:shadow-xl hover:border-azure-500/40 transition-all print-card" data-category="support-reporting">
+          <div>
+            <div class="p-5 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300">Technical Support &amp; Reporting</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400">Jan 2023 – July 2023</span>
+              </div>
+              <h3 class="text-base font-bold font-heading text-slate-900 dark:text-white group-hover:text-azure-600 dark:group-hover:text-azure-400 transition-colors">
+                PHI Inventory Management
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Internal Multi-Location Stock Control &amp; Optimization</p>
+            </div>
+            
+            <div class="p-5 space-y-3">
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                Delivered technical support for PHI Inventory System within Dynamics 365, developed customized Docentric reports for stock documents and operational reporting.
+              </p>
+              <div class="flex flex-wrap gap-1">
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Docentric Reports</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Inventory Tracking</span>
+                <span class="px-2 py-0.5 text-[11px] rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">D365 Support</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 pt-0">
+            <button onclick="openModal('phi')" class="w-full py-2 px-3 text-xs font-semibold rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-azure-600 hover:text-white dark:hover:bg-azure-600 transition-colors flex items-center justify-center gap-1.5 no-print">
+              <span>View Full Case Details</span>
+              <i class="ph ph-arrow-up-right"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="certifications" class="pt-6">
+      <div class="flex items-center space-x-2 mb-6">
+        <div class="h-6 w-1.5 bg-azure-600 rounded-full"></div>
+        <h2 class="text-2xl font-bold font-heading text-slate-900 dark:text-white">Microsoft Certifications &amp; Applied Skills</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Primary Certification: MB-500 -->
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-azure-900/10 via-white to-white dark:from-azure-950/40 dark:via-slate-900 dark:to-slate-900 border-2 border-azure-500/30 shadow-md flex flex-col justify-between print-card">
+          <div class="space-y-4">
+            <div class="flex items-start justify-between">
+              <div class="w-12 h-12 rounded-xl bg-azure-600 text-white flex items-center justify-center text-2xl shadow-md">
+                <i class="ph ph-certificate"></i>
+              </div>
+              <span class="px-2.5 py-1 text-xs font-bold rounded-full bg-azure-100 text-azure-800 dark:bg-azure-900 dark:text-azure-200">
+                Core Credential
+              </span>
+            </div>
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-azure-600 dark:text-azure-400">Microsoft Certified Associate</div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white font-heading mt-1">
+                Dynamics 365: Finance and Operations Apps Developer Associate (MB-500)
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                Validates specialized expertise in implementing and extending Dynamics 365 F&amp;O solutions using X++, building custom data entities, automating reporting, and developing enterprise integrations.
+              </p>
+            </div>
+          </div>
+          <div class="pt-4 border-t border-slate-100 dark:border-slate-800 mt-4 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+            <span>Issuer: Microsoft</span>
+            <span class="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold"><i class="ph ph-check-circle"></i> Verified</span>
+          </div>
+        </div>
+
+        <!-- Microsoft Applied Skills Card -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 print-card">
+          <div class="flex items-center space-x-3 text-purple-600 dark:text-purple-400 font-bold font-heading">
+            <i class="ph ph-lightning text-2xl"></i>
+            <h3 class="text-lg text-slate-900 dark:text-white">Microsoft Applied Skills Earned</h3>
+          </div>
+          <ul class="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+            <li class="flex items-start space-x-2.5">
+              <i class="ph ph-check-circle text-purple-600 dark:text-purple-400 text-base mt-0.5 flex-shrink-0"></i>
+              <span>Create and manage canvas apps with Power Apps</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="ph ph-check-circle text-purple-600 dark:text-purple-400 text-base mt-0.5 flex-shrink-0"></i>
+              <span>Create and manage automated processes by using Power Automate</span>
+            </li>
+            <li class="flex items-start space-x-2.5">
+              <i class="ph ph-check-circle text-purple-600 dark:text-purple-400 text-base mt-0.5 flex-shrink-0"></i>
+              <span>Create and manage model-driven apps with Power Apps and Dataverse</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Additional Microsoft Certifications -->
+        <div class="md:col-span-2 p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm print-card">
+          <h3 class="text-base font-bold font-heading text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+            <i class="ph ph-shield-check text-azure-600 dark:text-azure-400 text-xl"></i>
+            Additional Microsoft Credentials &amp; Specializations
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
+              <div class="text-xs font-bold text-azure-600 dark:text-azure-400">AI-900</div>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white mt-1">Azure AI Fundamentals</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Foundational principles of machine learning and AI workloads on Azure.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
+              <div class="text-xs font-bold text-azure-600 dark:text-azure-400">AZ-700</div>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white mt-1">Azure Network Engineer Associate</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Hybrid networking, routing, private endpoints, and network security architectures.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
+              <div class="text-xs font-bold text-azure-600 dark:text-azure-400">GH-300</div>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white mt-1">Microsoft Copilot</h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">AI-driven developer workflows, Copilot extensions, and enterprise productivity.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="education" class="pt-6">
+      <div class="flex items-center space-x-2 mb-6">
+        <div class="h-6 w-1.5 bg-azure-600 rounded-full"></div>
+        <h2 class="text-2xl font-bold font-heading text-slate-900 dark:text-white">Education &amp; Academic Projects</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <!-- Degree Details -->
+        <div class="md:col-span-5 p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 print-card">
+          <div class="flex items-center space-x-3 text-azure-600 dark:text-azure-400 font-bold font-heading">
+            <i class="ph ph-graduation-cap text-2xl"></i>
+            <h3 class="text-lg text-slate-900 dark:text-white">Engineering Degree</h3>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-base">Bachelor of Technology (B.Tech)</h4>
+            <p class="text-sm font-medium text-azure-600 dark:text-azure-400">Computer Science Engineering</p>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+              Sri Vasavi Engineering College (Autonomous)
+            </p>
+            <p class="text-xs text-slate-500 dark:text-slate-400">June 2018 – July 2022 &bull; Hyderabad</p>
+            
+            <div class="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold text-xs">
+              <i class="ph ph-star-fill text-amber-500"></i>
+              Grade: 8.23 CGPA
+            </div>
+          </div>
+        </div>
+
+        <!-- Academic Projects -->
+        <div class="md:col-span-7 p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 print-card">
+          <div class="flex items-center space-x-2 text-slate-900 dark:text-white font-bold font-heading">
+            <i class="ph ph-folder-open text-xl text-azure-600 dark:text-azure-400"></i>
+            <h3 class="text-base">Engineering Projects</h3>
+          </div>
+
+          <div class="space-y-3">
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
+              <h4 class="font-semibold text-xs sm:text-sm text-slate-900 dark:text-white">
+                Evaluation of Academic Performance Using Fuzzy Logic
+              </h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                Engineered a computational system to analyze student performance with a pre-trained fuzzy inference system and defined rule-base. Provided an intuitive, accessible interface to streamline academic evaluation.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60">
+              <h4 class="font-semibold text-xs sm:text-sm text-slate-900 dark:text-white">
+                Price Prediction of Used Cars (Mobile Application)
+              </h4>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                Developed a mobile application predicting used automobile market values based on key attributes such as mileage, condition, make, and market trend regression parameters.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="pt-6 no-print">
+      <div class="flex items-center space-x-2 mb-6">
+        <div class="h-6 w-1.5 bg-azure-600 rounded-full"></div>
+        <h2 class="text-2xl font-bold font-heading text-slate-900 dark:text-white">Get In Touch</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <!-- Direct Channels Card -->
+        <div class="md:col-span-5 p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-azure-700 via-azure-800 to-slate-900 text-white flex flex-col justify-between space-y-6 shadow-xl">
+          <div class="space-y-4">
+            <h3 class="text-xl font-bold font-heading">Let's discuss your D365 F&amp;O project</h3>
+            <p class="text-blue-100 text-xs sm:text-sm leading-relaxed">
+              Available for full lifecycle implementation, technical architecture, X++ customization, custom reporting, or system performance tuning.
+            </p>
+            
+            <div class="space-y-3.5 pt-2">
+              <a href="mailto:Venkatesh8008036296@gmail.com" class="flex items-center space-x-3 text-xs sm:text-sm text-blue-50 hover:text-white transition-colors">
+                <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <i class="ph ph-envelope-simple text-base"></i>
+                </div>
+                <span class="truncate">Venkatesh8008036296@gmail.com</span>
+              </a>
+
+              <a href="tel:+918008036296" class="flex items-center space-x-3 text-xs sm:text-sm text-blue-50 hover:text-white transition-colors">
+                <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <i class="ph ph-phone text-base"></i>
+                </div>
+                <span>+91 800 803 6296</span>
+              </a>
+
+              <div class="flex items-center space-x-3 text-xs sm:text-sm text-blue-50">
+                <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <i class="ph ph-map-pin text-base"></i>
+                </div>
+                <span>Hyderabad, Telangana, India</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-blue-400/30 flex items-center justify-between">
+            <span class="text-xs text-blue-200">Connect directly:</span>
+            <div class="flex space-x-2">
+              <a href="http://www.linkedin.com/in/venkatesh-orusu/" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors" title="LinkedIn"><i class="ph ph-linkedin-logo text-lg"></i></a>
+              <button onclick="copyShareableLink()" class="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors" title="Share Resume URL"><i class="ph ph-share-network text-lg"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Inquiry Form -->
+        <div class="md:col-span-7 p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm">
+          <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="contactName" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Your Name</label>
+                <input type="text" id="contactName" required class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-azure-500" placeholder="e.g. Hiring Manager">
+              </div>
+              <div>
+                <label for="contactEmail" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Your Email</label>
+                <input type="email" id="contactEmail" required class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-azure-500" placeholder="name@company.com">
+              </div>
+            </div>
+            <div>
+              <label for="contactSubject" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Subject / Project Scope</label>
+              <input type="text" id="contactSubject" required class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-azure-500" value="Discussion: D365 F&O Technical Consultant Engagement">
+            </div>
+            <div>
+              <label for="contactMessage" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Message</label>
+              <textarea id="contactMessage" rows="4" required class="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-azure-500 resize-none" placeholder="Share project details or role requirements..."></textarea>
+            </div>
+            <button type="submit" class="w-full py-3 px-4 rounded-xl bg-azure-600 hover:bg-azure-700 text-white text-sm font-semibold shadow-md hover:shadow-glow transition-transform active:scale-[0.99] flex items-center justify-center gap-2">
+              <i class="ph ph-paper-plane-tilt text-base"></i>
+              <span>Send Message to Venkatesh</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="mt-20 border-t border-slate-200 dark:border-slate-800/80 py-8 bg-white/40 dark:bg-slate-900/40 text-center text-xs text-slate-500 dark:text-slate-400 no-print">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>&copy; 2026 Venkatesh Orusu &bull; Microsoft Certified Dynamics 365 F&amp;O Technical Consultant.</p>
+      <div class="flex items-center space-x-4">
+        <a href="http://www.linkedin.com/in/venkatesh-orusu/" target="_blank" rel="noopener noreferrer" class="hover:text-azure-600 dark:hover:text-azure-400 transition-colors">LinkedIn</a>
+        <a href="mailto:Venkatesh8008036296@gmail.com" class="hover:text-azure-600 dark:hover:text-azure-400 transition-colors">Email</a>
+        <a href="#hero" class="hover:text-azure-600 dark:hover:text-azure-400 transition-colors">Back to Top &uarr;</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="projectModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="relative w-full max-w-2xl rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden p-6 sm:p-8 space-y-4 max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal()" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Close dialog">
+        <i class="ph ph-x text-xl"></i>
+      </button>
+
+      <div class="flex items-center gap-2">
+        <span id="modalTypeBadge" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-azure-100 text-azure-700 dark:bg-azure-900/40 dark:text-azure-300 inline-block">Project Type</span>
+        <span id="modalDuration" class="text-xs text-slate-500 dark:text-slate-400">Duration</span>
+      </div>
+
+      <div>
+        <h3 id="modalTitle" class="text-xl font-bold font-heading text-slate-900 dark:text-white">Client Name</h3>
+        <p id="modalClientDesc" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Client Profile Description</p>
+      </div>
+      
+      <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 space-y-1">
+        <div class="flex items-center justify-between">
+          <span class="text-slate-400 font-medium">Role Executed:</span>
+          <span id="modalRole" class="font-bold text-slate-800 dark:text-slate-200">Technical Consultant / Developer</span>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Project Highlights &amp; Technical Execution</h4>
+        <ul id="modalHighlights" class="space-y-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 list-disc list-inside"></ul>
+      </div>
+
+      <div class="pt-2">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Technologies &amp; Components Used</h4>
+        <div id="modalTechTags" class="flex flex-wrap gap-1.5"></div>
+      </div>
+
+      <div class="pt-4 flex items-center justify-end space-x-3 border-t border-slate-100 dark:border-slate-800">
+        <button onclick="closeModal()" class="px-4 py-2 text-xs font-semibold rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Close</button>
+        <button onclick="copyShareableLink()" class="px-4 py-2 text-xs font-semibold rounded-xl bg-azure-600 hover:bg-azure-700 text-white transition-colors">Share Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 px-4 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-2xl flex items-center space-x-2 text-xs font-semibold">
+    <i class="ph ph-check-circle text-emerald-400 dark:text-emerald-600 text-lg"></i>
+    <span id="toastMsg">Notification message</span>
+  </div>
+
+  <script>
+    // Theme Management (Light / Dark)
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const html = document.documentElement;
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        html.classList.add('dark');
+        themeIcon.classList.replace('ph-moon', 'ph-sun');
+      } else {
+        html.classList.remove('dark');
+        themeIcon.classList.replace('ph-sun', 'ph-moon');
+      }
+    }
+    initTheme();
+
+    themeToggleBtn.addEventListener('click', () => {
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        themeIcon.classList.replace('ph-sun', 'ph-moon');
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        themeIcon.classList.replace('ph-moon', 'ph-sun');
+      }
+    });
+
+    // Mobile Menu Navigation
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Toast Notification helper
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.textContent = message;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    // Copy Shareable link to clipboard (with execCommand fallback for iframe support)
+    function copyShareableLink() {
+      const currentUrl = window.location.href;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(currentUrl)
+          .then(() => showToast('Resume link copied to clipboard!'))
+          .catch(() => fallbackCopy(currentUrl));
+      } else {
+        fallbackCopy(currentUrl);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast('Resume link copied to clipboard!');
+      } catch (err) {
+        showToast('Link ready: ' + window.location.href);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    // Projects Filter Logic
+    function filterProjects(category, btnElement) {
+      const cards = document.querySelectorAll('.project-card');
+      const buttons = document.querySelectorAll('.project-filter-btn');
+
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-white', 'dark:bg-slate-700', 'shadow-sm', 'text-slate-900', 'dark:text-white', 'font-semibold');
+        btn.classList.add('text-slate-600', 'dark:text-slate-400');
+      });
+
+      btnElement.classList.add('bg-white', 'dark:bg-slate-700', 'shadow-sm', 'text-slate-900', 'dark:text-white', 'font-semibold');
+      btnElement.classList.remove('text-slate-600', 'dark:text-slate-400');
+
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Detailed Project Knowledge base strictly from Resume
+    const projectDetailsData = {
+      hayward: {
+        title: 'Hayward Pools',
+        clientDesc: 'Hayward is a global leader in pool equipment and automation solutions, focused on residential and commercial pool products such as pumps, filters, heaters, cleaners, lighting, water features, and connected control systems.',
+        duration: 'Nov 2025 – Present',
+        type: 'Implementation / Technical Consultant',
+        role: 'Technical Consultant / Developer',
+        highlights: [
+          'Built D365 F&O customizations using X++, extensions, forms, tables, and batch processing.',
+          'Enhanced sales, inventory, and finance processes with validations, logic changes, and defect fixes.',
+          'Supported debugging, QA validation, and Azure DevOps deployments with functional teams.'
+        ],
+        tech: ['Dynamics 365 F&O', 'X++', 'Forms & Tables', 'Batch Processing', 'Sales & Inventory Modules', 'Azure DevOps']
+      },
+      palmer: {
+        title: 'Palmer Donovan',
+        clientDesc: 'Palmer Donovan is a residential building materials distributor and door fabrication company, supplying dealers with products such as exterior doors, cabinets, decking, railing, siding, windows, flooring, and related construction materials.',
+        duration: 'April 2026 – Present',
+        type: 'Implementation / Technical Consultant',
+        role: 'Technical Consultant / Developer',
+        highlights: [
+          'Built D365 F&O enhancements for distribution and supply chain processes.',
+          'Supported integrations using data entities, OData, and Power Platform touchpoints.',
+          'Handled testing support, defect fixes, environment validation, and functional coordination.'
+        ],
+        tech: ['D365 F&O', 'Distribution & SCM', 'Data Entities', 'OData', 'Power Platform', 'Testing & Validation']
+      },
+      nvr: {
+        title: 'NVR',
+        clientDesc: 'NVR is a leading U.S. homebuilding and mortgage banking company, constructing homes under the Ryan Homes, NVHomes, and Heartland Homes brands while also providing mortgage, title, and settlement services to support homebuyers.',
+        duration: 'Dec 2025 – Present',
+        type: 'Implementation / Technical Consultant',
+        role: 'Technical Consultant / Developer',
+        highlights: [
+          'Developed D365 F&O customizations for homebuilding and finance processes.',
+          'Enhanced reports, validations, and automation across D365 F&O modules.',
+          'Provided analysis, debugging, code fixes, deployment support, and validation with functional teams.'
+        ],
+        tech: ['D365 F&O', 'Finance Modules', 'Homebuilding Workflows', 'SSRS Reporting', 'Azure DevOps Deployments']
+      },
+      cs: {
+        title: 'Construction Specialties (CS)',
+        clientDesc: 'Construction Specialties is a leader in architectural product problem solving because they embrace their customers\' complex challenges to deliver world-class solutions.',
+        duration: 'April 2025 – Oct 2025',
+        type: 'Implementation / Technical Consultant',
+        role: 'Offshore Developer - India',
+        highlights: [
+          'Customized D365 FO using X++ and extensions to meet client-specific business processes, including custom Legacy Item numbers.',
+          'Conducted large-scale Data Migration using Data Entities.'
+        ],
+        tech: ['D365 FO', 'X++ Extensions', 'Legacy Item Logic', 'Data Entities', 'Data Migration', 'Offshore Delivery']
+      },
+      'argano-ip': {
+        title: 'Argano IP (9 D365FO ISVs)',
+        clientDesc: 'Development and release lifecycle management of 9 Independent Software Vendor (ISV) solutions for Dynamics 365 Finance and Operations.',
+        duration: 'November 2024 – April 2025',
+        type: 'System Management / Technical Consultant',
+        role: 'Developer - India',
+        highlights: [
+          'Managed Environment Creation and Deallocation in Lifecycle Services (LCS).',
+          'Performed System Upgradation, Software Deployment, and Pipeline Building in Azure DevOps.',
+          'Created projects and configured Git repositories in Azure DevOps for development workflows.',
+          'Executed Product Releases to customers, ensuring smooth delivery and deployment processes.',
+          'Handled Data Restoration, Backups, and Environment Management using LCS and Azure Portal.',
+          'Automated virtual machine (VM) tasks in Azure Portal to optimize system performance and cost efficiency.'
+        ],
+        tech: ['Lifecycle Services (LCS)', 'Azure DevOps CI/CD Pipelines', 'Git Repositories', 'Azure Portal VM Automation', 'Data Restoration & Backups', 'ISV Release Management']
+      },
+      aquacal: {
+        title: 'AquaCal (Team Horner Group)',
+        clientDesc: 'AquaCal (a Team Horner Group company) offers a full range of high-performance heating and cooling units designed to meet any pool temperature requirements.',
+        duration: 'August 2023 – Oct 2025',
+        type: 'Implementation / Technical Consultant',
+        role: 'Offshore Developer - India',
+        highlights: [
+          'Led end-to-end technical implementation of D365 FO, including requirements gathering, design, development, testing, and deployment.',
+          'Customized D365 FO using X++ and extensions to meet client-specific business processes, including custom payment processing module.',
+          'Migrated legacy data to D365 FO using Data Management Framework (DMF).',
+          'Developed and deployed Docentric, SSRS, and Power BI reports for real-time financial and operational insights.',
+          'Conducted code reviews, performance optimization, and troubleshooting to ensure system stability and scalability.',
+          'Collaborated with functional consultants to translate business requirements into technical solutions.'
+        ],
+        tech: ['D365 FO Implementation', 'X++ Extensions', 'Custom Payment Module', 'DMF Data Migration', 'Docentric AX', 'SSRS', 'Power BI', 'Code Reviews']
+      },
+      phi: {
+        title: 'PHI Inventory Management',
+        clientDesc: 'Internal enterprise application for real-time tracking, control, and optimization of stock levels across multiple locations.',
+        duration: 'Jan 2023 – July 2023',
+        type: 'Support / Associate Technical Consultant',
+        role: 'Offshore Developer - India',
+        highlights: [
+          'Provided technical support for the PHI Inventory Management System within Dynamics 365.',
+          'Developed and customized Docentric reports for inventory-related documents and reports.'
+        ],
+        tech: ['Dynamics 365 F&O', 'Docentric AX Reports', 'Inventory Management', 'Support & Defect Fixing']
+      }
+    };
+
+    function openModal(projectKey) {
+      const p = projectDetailsData[projectKey];
+      if (!p) return;
+
+      document.getElementById('modalTypeBadge').textContent = p.type;
+      document.getElementById('modalDuration').textContent = p.duration;
+      document.getElementById('modalTitle').textContent = p.title;
+      document.getElementById('modalClientDesc').textContent = p.clientDesc;
+      document.getElementById('modalRole').textContent = p.role;
+
+      // Populate Highlights
+      const list = document.getElementById('modalHighlights');
+      list.innerHTML = '';
+      p.highlights.forEach(h => {
+        const li = document.createElement('li');
+        li.textContent = h;
+        list.appendChild(li);
+      });
+
+      // Populate Tags
+      const tagBox = document.getElementById('modalTechTags');
+      tagBox.innerHTML = '';
+      p.tech.forEach(t => {
+        const tag = document.createElement('span');
+        tag.className = 'px-2 py-0.5 text-xs rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-medium';
+        tag.textContent = t;
+        tagBox.appendChild(tag);
+      });
+
+      const modal = document.getElementById('projectModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('projectModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    document.getElementById('projectModal').addEventListener('click', (e) => {
+      if (e.target.id === 'projectModal') closeModal();
+    });
+
+    // Contact Form Action
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value;
+      const email = document.getElementById('contactEmail').value;
+      const subject = document.getElementById('contactSubject').value;
+      const message = document.getElementById('contactMessage').value;
+
+      const mailtoUrl = `mailto:Venkatesh8008036296@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("Sender: " + name + " (" + email + ")\n\n" + message)}`;
+      window.location.href = mailtoUrl;
+
+      showToast('Opening your default email client...');
+    }
+  </script>
+</body>
+</html>
